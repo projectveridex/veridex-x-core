@@ -1,34 +1,33 @@
 """
-==========================================
 VERIDEX X
-CODEBERG HUNTER
-==========================================
+Codeberg Hunter
 """
 
-from hunters.base_hunter import BaseHunter
+from core.opportunity import Opportunity
 
 
-class CodebergHunter(BaseHunter):
+def scan_codeberg():
 
-    def __init__(self):
+    return [
 
-        super().__init__("Codeberg")
+        Opportunity(
 
-    def scan(self):
+            source="Codeberg",
 
-        jobs = []
+            title="Codeberg Contribution",
 
-        opportunity = {
-            "source": "Codeberg",
-            "title": "Open Source Contribution",
-            "description": "Public repository looking for contributors.",
-            "crypto_payment": False,
-            "low_competition": True,
-            "high_frequency": True,
-            "good_payment": False,
-            "easy_to_complete": True
-        }
+            description="Community repository looking for help.",
 
-        jobs.append(self.normalize(opportunity))
+            crypto_payment=False,
 
-        return jobs
+            low_competition=True,
+
+            high_frequency=True,
+
+            good_payment=False,
+
+            easy_to_complete=True
+
+        )
+
+    ]
