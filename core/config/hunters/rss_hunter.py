@@ -1,35 +1,56 @@
 """
 ==========================================
 VERIDEX X
-RSS HUNTER
+REAL RSS HUNTER
 ==========================================
 """
+
+import feedparser
 
 from core.opportunity import Opportunity
 
 
+RSS_FEEDS = [
+
+    "https://hnrss.org/jobs",
+
+    "https://hnrss.org/newest"
+
+]
+
+
 def scan_rss():
 
-    return [
+    opportunities = []
 
-        Opportunity(
+    for url in RSS_FEEDS:
 
-            source="RSS",
+        feed = feedparser.parse(url)
 
-            title="Public Opportunity Feed",
+        for entry in feed.entries[:10]:
 
-            description="New opportunity discovered through RSS.",
+            opportunities.append(
 
-            crypto_payment=False,
+                Opportunity(
 
-            low_competition=True,
+                    source="RSS",
 
-            high_frequency=True,
+                    title=entry.title,
 
-            good_payment=True,
+                    description=getattr(entry, "summary", ""),
 
-            easy_to_complete=True
+                    crypto_payment=False,
 
-        )
+                    low_competition=True,
 
-    ]
+                    high_frequency=True,
+
+                    good_payment=True,
+
+                    easy_to_complete=True
+
+                )
+
+            )
+
+    return opportunities
