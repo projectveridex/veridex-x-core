@@ -1,16 +1,18 @@
 """
+==========================================
 VERIDEX X
-Configuration Settings
+SETTINGS
+==========================================
 """
 
-APP_NAME = "VERIDEX X"
-VERSION = "0.1.0"
+MODE = "MANUAL"
 
-PAYMENT_METHODS = [
-    "USDT TRC20",
-    "USDC"
-]
+SCAN_INTERVAL = 300
 
-MAX_RESULTS = 50
+AUTO_APPROVAL = False
 
-ENABLE_CRYPTO_FILTER = True
+CRYPTO_PRIORITY = True
+
+LOW_COMPETITION_ONLY = True
+
+MIN_SCORE = 70
