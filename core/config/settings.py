@@ -1,0 +1,16 @@
+"""
+VERIDEX X
+Configuration Settings
+"""
+
+APP_NAME = "VERIDEX X"
+VERSION = "0.1.0"
+
+PAYMENT_METHODS = [
+    "USDT TRC20",
+    "USDC"
+]
+
+MAX_RESULTS = 50
+
+ENABLE_CRYPTO_FILTER = True
