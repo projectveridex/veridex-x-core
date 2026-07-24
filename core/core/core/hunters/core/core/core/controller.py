@@ -22,14 +22,21 @@ planner = TaskPlanner()
 worker = JobWorker()
 validator = WorkValidator()
 
+# Stores the latest opportunities found
+LAST_SCAN = []
+
 
 def run_veridex():
+
+    global LAST_SCAN
 
     log("Starting VERIDEX pipeline...")
 
     opportunities = run_hunters()
 
     opportunities = remove_duplicates(opportunities)
+
+    LAST_SCAN = opportunities
 
     for opportunity in opportunities:
 
@@ -56,3 +63,8 @@ def run_veridex():
     )
 
     return approval_queue.pending()
+
+
+def get_last_scan():
+
+    return LAST_SCAN
