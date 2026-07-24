@@ -1,29 +1,23 @@
 """
-==========================================
 VERIDEX X
-HUNTER MANAGER
-==========================================
+MASTER HUNTER MANAGER
 """
 
-from hunters.github_hunter import scan_github
-from hunters.gitlab_hunter import scan_gitlab
-from hunters.codeberg_hunter import scan_codeberg
+from hunters.github_live_hunter import scan_github_live
+from hunters.gitlab_live_hunter import scan_gitlab_live
 from hunters.rss_hunter import scan_rss
-from hunters.sourceforge_hunter import scan_sourceforge
-from hunters.open_collective_hunter import scan_open_collective
 
 
 def run_hunters():
 
     opportunities = []
 
-    opportunities.extend(scan_github())
-    opportunities.extend(scan_gitlab())
-    opportunities.extend(scan_codeberg())
-    opportunities.extend(scan_rss())
-    opportunities.extend(scan_sourceforge())
-    opportunities.extend(scan_open_collective())
+    opportunities.extend(scan_github_live())
 
-    print(f"Hunters collected {len(opportunities)} opportunities.")
+    opportunities.extend(scan_gitlab_live())
+
+    opportunities.extend(scan_rss())
+
+    print(f"Collected {len(opportunities)} live opportunities.")
 
     return opportunities
