@@ -12,17 +12,34 @@ class ApprovalQueue:
 
         self.queue = []
 
-    def add(self, opportunity):
+    def add(self, item):
 
-        self.queue.append(opportunity)
+        self.queue.append(item)
 
     def pending(self):
 
         return self.queue
 
-    def approve(self):
+    def approve(self, index=0):
 
         if not self.queue:
             return None
 
-        return self.queue.pop(0)
+        if index < 0 or index >= len(self.queue):
+            return None
+
+        return self.queue.pop(index)
+
+    def reject(self, index=0):
+
+        if not self.queue:
+            return None
+
+        if index < 0 or index >= len(self.queue):
+            return None
+
+        return self.queue.pop(index)
+
+    def count(self):
+
+        return len(self.queue)
