@@ -1,23 +1,33 @@
 """
 VERIDEX X
-GitLab Opportunity Hunter
+GitLab Hunter
 """
+
+from core.opportunity import Opportunity
+
 
 def scan_gitlab():
 
-    opportunities = []
+    return [
 
-    sample = {
-        "source": "GitLab",
-        "title": "Open source issue",
-        "description": "Public repository looking for contributors",
-        "crypto_payment": False,
-        "low_competition": True,
-        "high_frequency": True,
-        "good_payment": False,
-        "easy_to_complete": True
-    }
+        Opportunity(
 
-    opportunities.append(sample)
+            source="GitLab",
 
-    return opportunities
+            title="GitLab Open Issue",
+
+            description="Repository requesting contributors.",
+
+            crypto_payment=False,
+
+            low_competition=True,
+
+            high_frequency=True,
+
+            good_payment=False,
+
+            easy_to_complete=True
+
+        )
+
+    ]
