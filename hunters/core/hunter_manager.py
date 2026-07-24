@@ -12,12 +12,26 @@ def run_hunters():
 
     opportunities = []
 
-    opportunities.extend(scan_github_live())
+    hunters = [
+        ("GitHub", scan_github_live),
+        ("GitLab", scan_gitlab_live),
+        ("RSS", scan_rss),
+    ]
 
-    opportunities.extend(scan_gitlab_live())
+    for name, hunter in hunters:
 
-    opportunities.extend(scan_rss())
+        try:
 
-    print(f"Collected {len(opportunities)} live opportunities.")
+            jobs = hunter()
+
+            opportunities.extend(jobs)
+
+            print(f"✅ {name}: {len(jobs)} opportunities")
+
+        except Exception as e:
+
+            print(f"❌ {name} failed: {e}")
+
+    print(f"\n🔥 Total Live Opportunities: {len(opportunities)}")
 
     return opportunities
