@@ -5,12 +5,14 @@ COMMAND CENTER
 ==========================================
 """
 
+from core.controller import run_veridex
+
 WELCOME = """
 ==========================================
         VERIDEX X COMMAND CENTER
 ==========================================
 
-Available Commands
+Commands
 
 scan
 jobs
@@ -33,19 +35,29 @@ def start_chat():
 
         if command == "scan":
 
-            print("Scanning opportunity network...")
+            print("\nLaunching VERIDEX Hunters...\n")
+
+            run_veridex()
 
         elif command == "jobs":
 
-            print("Displaying available opportunities...")
+            print("Opening opportunity database...")
 
         elif command == "approve":
 
-            print("Approval mode opened.")
+            print("Approval Center coming soon...")
 
         elif command == "status":
 
-            print("System healthy.")
+            print("""
+System Status
+
+Hunters : READY
+Brain   : READY
+Database: READY
+Crypto  : READY
+Controller : READY
+""")
 
         elif command == "help":
 
