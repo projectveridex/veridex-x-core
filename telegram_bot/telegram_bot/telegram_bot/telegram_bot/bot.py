@@ -15,6 +15,8 @@ from core.controller import (
     get_approval_queue
 )
 
+from core.execution_engine import execute
+
 
 async def start(update: Update, context: ContextTypes.DEFAULT_TYPE):
 
@@ -54,12 +56,10 @@ async def jobs(update: Update, context: ContextTypes.DEFAULT_TYPE):
     message = "📋 Latest Opportunities\n\n"
 
     for i, job in enumerate(opportunities[:10], start=1):
+
         message += f"{i}. {job.title} ({job.source})\n"
 
-    if len(opportunities) > 10:
-        message += f"\n...and {len(opportunities) - 10} more."
-
-    message += "\n\nUse /approve <number>"
+    message += "\nUse /approve <number>"
 
     await update.message.reply_text(message)
 
@@ -84,9 +84,11 @@ async def approve(update: Update, context: ContextTypes.DEFAULT_TYPE):
         )
         return
 
+
     queue = get_approval_queue()
 
     approved = queue.approve(index)
+
 
     if approved is None:
 
@@ -95,8 +97,29 @@ async def approve(update: Update, context: ContextTypes.DEFAULT_TYPE):
         )
         return
 
+
+    result = execute(approved)
+
+
     await update.message.reply_text(
-        f"✅ Approved:\n{approved['opportunity'].title}"
+        f"""
+✅ APPROVED
+
+Job:
+{approved['opportunity'].title}
+
+⚙️ Execution Status:
+{result['status']}
+
+Workflow:
+{result['job_type']}
+
+Next Steps:
+"""
+        + "\n".join(
+            f"• {step}" 
+            for step in result["workflow_steps"]
+        )
     )
 
 
