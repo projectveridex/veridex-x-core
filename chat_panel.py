@@ -5,18 +5,21 @@ COMMAND CENTER
 ==========================================
 """
 
-from core.controller import run_veridex
+from core.controller import (
+    run_veridex,
+    approval_queue
+)
 
 WELCOME = """
 ==========================================
-        VERIDEX X COMMAND CENTER
+VERIDEX X COMMAND CENTER
 ==========================================
 
 Commands
 
 scan
-jobs
 approve
+jobs
 status
 help
 exit
@@ -35,17 +38,31 @@ def start_chat():
 
         if command == "scan":
 
-            print("\nLaunching VERIDEX Hunters...\n")
+            print("\nLaunching VERIDEX...\n")
 
             run_veridex()
 
-        elif command == "jobs":
-
-            print("Opening opportunity database...")
-
         elif command == "approve":
 
-            print("Approval Center coming soon...")
+            item = approval_queue.approve()
+
+            if item is None:
+
+                print("No opportunities waiting.")
+
+            else:
+
+                print("\n======================")
+                print("APPROVED")
+                print("======================")
+                print(item["opportunity"].title)
+                print(item["proposal"])
+
+        elif command == "jobs":
+
+            print(
+                f"{len(approval_queue.pending())} job(s) waiting."
+            )
 
         elif command == "status":
 
@@ -53,10 +70,10 @@ def start_chat():
 System Status
 
 Hunters : READY
-Brain   : READY
-Database: READY
-Crypto  : READY
-Controller : READY
+Brain : READY
+Queue : READY
+Learning : READY
+Scheduler : READY
 """)
 
         elif command == "help":
