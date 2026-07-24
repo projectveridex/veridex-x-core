@@ -1,28 +1,16 @@
-"""
-==========================================
-VERIDEX X
-PIPELINE TEST
-==========================================
-"""
-
 from core.controller import run_veridex
+from core.pipeline_status import report
 
 
 def main():
 
-    print("Running VERIDEX pipeline...\n")
+    print("Starting VERIDEX validation...\n")
 
     queue = run_veridex()
 
-    print(f"Pipeline finished.")
+    report()
 
-    print(f"Jobs waiting for approval: {len(queue)}")
-
-    if queue:
-
-        print("\nFirst opportunity:")
-
-        print(queue[0]["opportunity"].title)
+    print(f"Approval Queue: {len(queue)}")
 
 
 if __name__ == "__main__":
