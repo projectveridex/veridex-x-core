@@ -1,20 +1,23 @@
 """
-VERIDEX X CORE
-Public Opportunity Intelligence Engine
+==========================================
+VERIDEX X
+PUBLIC OPPORTUNITY INTELLIGENCE ENGINE
+==========================================
 """
 
-VERSION = "0.1.0"
-
-from core.controller import run_veridex
+from ui.chat_panel import start_chat
 
 
 def startup():
-    print("================================")
-    print(" VERIDEX X ONLINE ")
-    print(" Version:", VERSION)
-    print("================================")
+
+    print("""
+==========================================
+      VERIDEX X ONLINE
+==========================================
+""")
+
+    start_chat()
 
 
 if __name__ == "__main__":
     startup()
-    run_veridex()
