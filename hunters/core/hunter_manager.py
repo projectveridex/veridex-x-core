@@ -7,24 +7,23 @@ HUNTER MANAGER
 
 from hunters.github_hunter import scan_github
 from hunters.gitlab_hunter import scan_gitlab
-
-all_opportunities = []
+from hunters.codeberg_hunter import scan_codeberg
+from hunters.rss_hunter import scan_rss
+from hunters.sourceforge_hunter import scan_sourceforge
+from hunters.open_collective_hunter import scan_open_collective
 
 
 def run_hunters():
 
-    global all_opportunities
+    opportunities = []
 
-    print("Launching Hunters...\n")
+    opportunities.extend(scan_github())
+    opportunities.extend(scan_gitlab())
+    opportunities.extend(scan_codeberg())
+    opportunities.extend(scan_rss())
+    opportunities.extend(scan_sourceforge())
+    opportunities.extend(scan_open_collective())
 
-    github_jobs = scan_github()
-    gitlab_jobs = scan_gitlab()
+    print(f"Hunters collected {len(opportunities)} opportunities.")
 
-    all_opportunities = []
-
-    all_opportunities.extend(github_jobs)
-    all_opportunities.extend(gitlab_jobs)
-
-    print(f"Total opportunities found: {len(all_opportunities)}")
-
-    return all_opportunities
+    return opportunities
